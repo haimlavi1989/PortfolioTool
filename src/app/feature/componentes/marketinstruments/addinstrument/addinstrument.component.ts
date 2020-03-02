@@ -15,13 +15,13 @@ export class AddinstrumentComponent implements OnInit {
   public instrument: Instrument;
 
   constructor() { 
-    this.instrument = {"id": 0, "name": "", "symbol": "", "instrumentType": ""};
-    this.errormesagess = [];
-    this.errormesagess.push("Can not be emptey.");
-    this.errormesagess.push("Must contain 2 chars minimum");
   }
 
   ngOnInit(): void {
+        this.instrument = {"id": 0, "name": "", "symbol": "", "instrumentType": ""};
+        this.errormesagess = [];
+        this.errormesagess.push("Can not be emptey.");
+        this.errormesagess.push("Must contain 2 chars minimum");
   }
 
   onSubmit(form: NgForm) {

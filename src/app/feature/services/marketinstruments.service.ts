@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Instrument } from '../shared/instrument'
 import { HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({

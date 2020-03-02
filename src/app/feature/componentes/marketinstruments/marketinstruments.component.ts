@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Instrument } from '../../shared/instrument'
 import { MarketinstrumentsService } from '../../services/marketinstruments.service'
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-marketinstruments',
   templateUrl: './marketinstruments.component.html',
   styleUrls: ['./marketinstruments.component.css']
 })
-export class MarketinstrumentsComponent implements OnInit {
+export class MarketinstrumentsComponent implements OnInit, OnDestroy {
  
   public marketinstruments: Instrument[]; 
   public searchText: string;
+  private httpSubscription1: Subscription;
 
   constructor(private http:MarketinstrumentsService) { 
     this.marketinstruments = []
@@ -18,8 +20,10 @@ export class MarketinstrumentsComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.http.getInstruments().subscribe(result => {
-      this.marketinstruments = result
+    this.httpSubscription1 = this.http.getInstruments().subscribe(result => {
+          if (result) {
+            this.marketinstruments = result
+          }
       });
   }
 
@@ -38,10 +42,14 @@ export class MarketinstrumentsComponent implements OnInit {
    public receivedeleteInstrument(instrumentId) {
      this.http.deleteInstrument(instrumentId).subscribe( instrument => 
       {
-        if (instrument === 204){
+        if (instrument === 204) {
           this.deleteInstrument(instrumentId);
         }
       });
+   }
+
+   ngOnDestroy() {
+     this.httpSubscription1.unsubscribe();
    }
 
 }
