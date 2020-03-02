@@ -1,0 +1,43 @@
+<div class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add new instrument: </h2>
+        </div>
+
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">           
+            <div class="form-group">
+              <label for="name">Name: </label>
+              <input type="text" name="name" minlength="2" required  [(ngModel)]="instrument.name" #thename="ngModel">
+              <div class="inputerrors">
+                  <div *ngIf="thename.invalid && thename.errors.required && thename.dirty">{{ errormesagess[0] }}</div>
+                  <div *ngIf="thename.invalid && thename.errors.minlength && thename.dirty">{{ errormesagess[1] }}</div>
+              </div> 
+            </div>
+
+            <div class="form-group">
+              <label for="symbol">Symbol: </label>
+              <input type="text" name="symbol" minlength="2" required  [(ngModel)]="instrument.symbol" #thesymbol="ngModel">
+              <div class="inputerrors">
+                  <div *ngIf="thesymbol.invalid && thesymbol.errors.required && thesymbol.dirty">{{ errormesagess[0] }}</div>
+                  <div *ngIf="thesymbol.invalid && thesymbol.errors.minlength && thesymbol.dirty">{{ errormesagess[1] }}</div>
+              </div> 
+            </div>
+
+            <div class="form-group">
+              <label for="instrumentType">Instrument Type: </label>
+              <input type="text" name="instrumentType" minlength="2" required  [(ngModel)]="instrument.instrumentType" #theinstrumentType="ngModel">
+              <div class="inputerrors">
+                  <div *ngIf="theinstrumentType.invalid && theinstrumentType.errors.required && theinstrumentType.dirty">{{ errormesagess[0] }}</div>
+                  <div *ngIf="theinstrumentType.invalid && theinstrumentType.errors.minlength && theinstrumentType.dirty">{{ errormesagess[1] }}</div>
+              </div> 
+            </div>
+            
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <input type="submit" class="btn btn-sm btn-outline-secondary" value="Add">
+                    <input type="reset" class="btn btn-sm btn-outline-secondary" value="reset">
+                  </div>
+            </div>
+          </form>
+    </div>  
+</div>          

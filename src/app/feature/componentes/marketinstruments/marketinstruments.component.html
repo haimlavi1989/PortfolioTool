@@ -1,0 +1,7 @@
+<div class="instrument">
+    <div class="container">
+        <app-addinstrument (addinstrumentEvent)="receiveAddInstrument($event);"></app-addinstrument><br>
+        Search: <input class="form-control" type="text" name="search" [(ngModel)]="searchText">
+        <app-instrument *ngFor="let instrument of marketinstruments | instrumentsFilterPipe: searchText;" [instrument]="instrument" (deletInstrumentEvent)="receivedeleteInstrument($event)"></app-instrument>
+    </div>  
+</div>
