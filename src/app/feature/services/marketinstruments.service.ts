@@ -3,12 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Instrument } from '../shared/instrument'
 import { HttpHeaders } from '@angular/common/http';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-  })
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,18 +15,24 @@ export class MarketinstrumentsService {
   
   // GET: get all Instruments from database
   getInstruments() {
-    return this.http.get<Instrument[]>(this.instrumentsurl);
+    return this.http.get<Instrument[]>(this.instrumentsurl, {
+      observe: 'response'
+    });
   }
 
   // POST: add a new Instrument to the database
   addInstrument(instrument: Instrument) {
-    return this.http.post<Instrument>(this.instrumentsurl, instrument, httpOptions);
+    return this.http.post<Instrument>(this.instrumentsurl, instrument, {
+      observe: 'response'
+    });
   }
 
   // DELETE: delete an instrument from the database
   deleteInstrument(id: number) {
     const url = `${this.instrumentsurl}/${id}`; // DELETE api/instruments/42
-    return this.http.delete(url, httpOptions);
+    return this.http.delete(url, {
+      observe: 'response'
+    });
   }
 
 }

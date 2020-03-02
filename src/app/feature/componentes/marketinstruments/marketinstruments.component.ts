@@ -20,17 +20,17 @@ export class MarketinstrumentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.httpSubscription1 = this.http.getInstruments().subscribe(result => {
-          if (result) {
-            this.marketinstruments = result
+    this.httpSubscription1 = this.http.getInstruments().subscribe(response => {
+          if (response && response.status === 200) {
+            this.marketinstruments = response.body
           }
       });
   }
 
   public receiveAddInstrument(newInstrument) {
-    this.http.addInstrument(newInstrument).subscribe(instrument => {
-        if (instrument) {
-          this.marketinstruments.push(instrument);
+    this.http.addInstrument(newInstrument).subscribe(response => {
+        if (response && response.status === 200) {
+          this.marketinstruments.push(response.body);
         }
     });
    }
@@ -40,9 +40,9 @@ export class MarketinstrumentsComponent implements OnInit, OnDestroy {
   }
 
    public receivedeleteInstrument(instrumentId) {
-     this.http.deleteInstrument(instrumentId).subscribe( instrument => 
+     this.http.deleteInstrument(instrumentId).subscribe( response => 
       {
-        if (instrument === 204) {
+        if (response.status === 204) {
           this.deleteInstrument(instrumentId);
         }
       });
